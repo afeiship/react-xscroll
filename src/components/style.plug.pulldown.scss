@@ -1,0 +1,25 @@
+.xs-plugin-pulldown {
+  &-container{
+    text-align: center;
+    width: 100%;
+    line-height: 50px;
+  }
+
+  &-up{
+    .up {
+      display: inline;
+    }
+    .down {
+      display: none;
+    }
+  }
+
+  &-down{
+    .up {
+      display: none;
+    }
+    .down {
+       display: inline;
+    }
+  }
+}

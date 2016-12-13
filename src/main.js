@@ -1,3 +1,6 @@
-import ReactXscroll from 'components/react-xscroll';
-console.log(ReactXscroll);
-export default ReactXscroll;
+import ReactXScroll from 'components/react-xscroll';
+import ReactXScrollCtrl from 'components/react-xscroll-ctrl';
+module.exports = {
+  ReactXScroll,
+  ReactXScrollCtrl
+};

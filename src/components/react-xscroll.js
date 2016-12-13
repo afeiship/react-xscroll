@@ -3,9 +3,9 @@ import './style.plug.pulldown.scss';
 import './style.plug.pullup.scss';
 
 import XScroll from 'xscroll/build/cmd/xscroll';
-import PullUp from 'xscroll/build/cmd/plugins/pullup';
-import PullDown from 'xscroll/build/cmd/plugins/pulldown';
-import Infinite from 'xscroll/build/cmd/plugins/infinite';
+import XScrollPullUp from 'xscroll/build/cmd/plugins/pullup';
+import XScrollPullDown from 'xscroll/build/cmd/plugins/pulldown';
+import XScrollInfinite from 'xscroll/build/cmd/plugins/infinite';
 import classNames from 'classnames';
 
 import $ from 'n-zepto'
@@ -39,18 +39,21 @@ class ReactXScroll extends React.Component{
   static createIscroll(inOptions){
     return new XScroll(inOptions);
   }
+
   static createPullUpPlugin(inScrollInstance,inOptions){
-    var pullup = new PullUp(inOptions);
+    var pullup = new XScrollPullUp(inOptions);
     inScrollInstance.plug(pullup);
     return pullup;
   }
+
   static createPullDownPlugin(inScrollInstance,inOptions){
-    var pulldown = new PullDown(inOptions);
+    var pulldown = new XScrollPullDown(inOptions);
     inScrollInstance.plug(pulldown);
     return pulldown;
   }
+
   static createInfinitePlugin(inScrollInstance,inOptions){
-    var infinite = new Infinite(inOptions);
+    var infinite = new XScrollInfinite(inOptions);
     inScrollInstance.plug(infinite);
     return infinite;
   }

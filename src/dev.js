@@ -2,8 +2,14 @@ import {ReactXScroll,ReactXScrollCtrl} from './main';
 import './dev.scss';
 import $ from 'n-zepto'
 
+  var pageCache ={};
+  var page = 1;
+  var totalPage = 5;
+
+
 class App extends React.Component{
   componentDidMount(){
+    this._instance=ReactXScrollCtrl.getInstance('test');
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
   }
 
@@ -11,18 +17,41 @@ class App extends React.Component{
     // this._instnace.invoke('scrollTo',0,-100);
   }
 
-  requestData(inPage,inRows){
-    var self=this;
+  getDataRefresh(args){
     $.ajax({
-      url: `http://lab.cubiq.org/iscroll5/demos/infinite/dataset.php?start=${inPage}&count=${inRows}`,
-      method: 'GET',
-      data: {
-        query1: 'value1'
-      },
-      success:function(data) {
-	       self._instnace.invoke('updateCache',inPage, data);
-      }
+        url: "http://xscroll.github.io/demos/data.json",
+        dataType:"json",
+        success:function(data){
+          args._pulldown.reset(function(){
+            args._xscroll.render();
+          });
+        }
     });
+  }
+
+  getDataInfinite(args){
+    if (!pageCache[page]) {
+      pageCache[page] = 1;
+      $.ajax({
+        url: "http://xscroll.github.io/demos/data.json",
+        dataType: "json",
+        success: function(data) {
+          if (page > totalPage) {
+            //last page
+            args._pullup.complete();
+            //destroy plugin
+            args._xscroll.unplug(args._pullup);
+            return;
+          };
+          args._infinite.append(0, data);
+          args._xscroll.render();
+          //loading complete
+          args._pullup.complete();
+          page++;
+        }
+      })
+    }
+
   }
 
   render(){
@@ -31,7 +60,30 @@ class App extends React.Component{
         <header id="header" onClick={this._click.bind(this)}>
           Header
         </header>
-        <ReactXScroll>
+        <ReactXScroll
+        onRefresh={this.getDataRefresh.bind(this)}
+        onInfinite={this.getDataInfinite.bind(this)}
+        pulldownOptions={{
+          autoRefresh:false
+        }}
+        pullupOptions={{
+            upContent:"pull up to load more ...",
+            downContent:"release to load ...",
+            loadingContent:"loading ...",
+            bufferHeight:0
+        }}
+
+        infiniteOptions={{
+            infiniteElements:"#J_Scroll .row",
+            renderHook:function(el,data){
+              el.innerText = data.data.num;
+            }
+        }}
+
+        xscrollOptions={{
+            renderTo: "#J_Scroll",
+            lockY:false
+        }}>
           <div id="J_Scroll">
             <div className="xs-container">
               <ul className="xs-content">

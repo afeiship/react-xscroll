@@ -60,6 +60,28 @@ class App extends React.Component{
         <header id="header" onClick={this._click.bind(this)}>
           Header
         </header>
+        <ReactXScroll xscrollOptions={{
+            renderTo: "#J_Scroll1",
+            lockY:true,
+            lockX:false,
+            scrollbarX:false,
+            scrollbarY:false
+        }}>
+          <div id="J_Scroll1">
+            <div className="xs-container">
+              <ul className="xs-content">
+                <li  className="row">Pretty row 1</li>
+                <li  className="row">Pretty row 2</li>
+                <li  className="row">Pretty row 3</li>
+                <li  className="row">Pretty row 4</li>
+                <li  className="row">Pretty row 5</li>
+                <li  className="row">Pretty row 6</li>
+                <li  className="row">Pretty row 7</li>
+              </ul>
+            </div>
+          </div>
+        </ReactXScroll>
+
         <ReactXScroll
         onRefresh={this.getDataRefresh.bind(this)}
         onInfinite={this.getDataInfinite.bind(this)}

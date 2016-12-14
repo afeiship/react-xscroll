@@ -52,7 +52,7 @@ body {
 #J_Scroll {
     position: absolute;
     z-index: 1;
-    top: 45px;
+    top: 145px;
     bottom: 48px;
     left: 0;
     width: 100%;
@@ -66,4 +66,30 @@ body {
   line-height: 40px;
   border-bottom: 1px solid #ccc;
   background-color: #fafafa;
+}
+
+
+#J_Scroll1{
+  margin-top: 45px;
+  overflow-x:scroll;
+  height: 100px;
+}
+#J_Scroll1 ul{
+    white-space: nowrap;
+    position: absolute;
+    height: 100%;
+    font-size: 0;
+}
+
+#J_Scroll1 ul li{
+    display: inline-block;
+    font-size: 12px;
+    width: 100px;
+    height: 100%;
+    border-left:1px solid #ccc;
+    border-right:1px solid #fff;
+}
+.xs-container{
+    width: 100%;
+    height: 100%;
 }

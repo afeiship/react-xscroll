@@ -8,9 +8,6 @@ import XScrollPullDown from 'xscroll/build/cmd/plugins/pulldown';
 import XScrollInfinite from 'xscroll/build/cmd/plugins/infinite';
 import classNames from 'classnames';
 
-import $ from 'n-zepto'
-
-
 let instanceMap = {};
 
 class ReactXScroll extends React.Component{
@@ -36,24 +33,30 @@ class ReactXScroll extends React.Component{
     onInfinite:null
   };
 
-  static createIscroll(inOptions){
-    return new XScroll(inOptions);
+  static createIscroll(inProps){
+    return new XScroll(inProps.xscrollOptions);
   }
 
-  static createPullUpPlugin(inScrollInstance,inOptions){
-    var pullup = new XScrollPullUp(inOptions);
+  static createPullUpPlugin(inScrollInstance,inProps){
+    var pullup = new XScrollPullUp(inProps.pullupOptions);
+    pullup.on('loading',function(){
+      inProps.onInfinite(self);
+    });
     inScrollInstance.plug(pullup);
     return pullup;
   }
 
-  static createPullDownPlugin(inScrollInstance,inOptions){
-    var pulldown = new XScrollPullDown(inOptions);
+  static createPullDownPlugin(inScrollInstance,inProps){
+    var pulldown = new XScrollPullDown(inProps.pulldownOptions);
     inScrollInstance.plug(pulldown);
+    pulldown.on('loading',function(e){
+      inProps.onRefresh(self);
+    });
     return pulldown;
   }
 
-  static createInfinitePlugin(inScrollInstance,inOptions){
-    var infinite = new XScrollInfinite(inOptions);
+  static createInfinitePlugin(inScrollInstance,inProps){
+    var infinite = new XScrollInfinite(inProps.infiniteOptions);
     inScrollInstance.plug(infinite);
     return infinite;
   }
@@ -68,20 +71,13 @@ class ReactXScroll extends React.Component{
 
   componentDidMount(){
     var self = this;
-    var xscroll = this._xscroll = ReactXScroll.createIscroll(this.props.xscrollOptions);
-    var infinite = this._infinite = ReactXScroll.createInfinitePlugin(this._xscroll,this.props.infiniteOptions);
-    var pullup = this._pullup = ReactXScroll.createPullUpPlugin(this._xscroll,this.props.pullupOptions);
-    var pulldown = this._pulldown = ReactXScroll.createPullDownPlugin(this._xscroll,this.props.pulldownOptions);
+    var xscroll = this._xscroll = ReactXScroll.createIscroll(this.props);
+    this._infinite = ReactXScroll.createInfinitePlugin(xscroll,this.props);
+    this._pullup = ReactXScroll.createPullUpPlugin(xscroll,this.props);
+    this._pulldown = ReactXScroll.createPullDownPlugin(xscroll,this.props);
 
-    pullup.on('loading',function(){
-      self.props.onInfinite(self);
-    });
-
-    pulldown.on('loading',function(e){
-      self.props.onRefresh(self);
-    })
-
-    this.props.onInfinite(this);
+    //initial once:?
+    this.props.onInfinite && this.props.onInfinite(this);
     xscroll.render();
   }
 

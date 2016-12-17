@@ -1,4 +1,4 @@
-import {ReactXScroll,ReactXScrollCtrl} from './main';
+import ReactXScroll from './main';
 import './dev.scss';
 import $ from 'n-zepto'
 
@@ -9,7 +9,7 @@ import $ from 'n-zepto'
 
 class App extends React.Component{
   componentDidMount(){
-    this._instance=ReactXScrollCtrl.getInstance('test');
+    this._instance=this.refs.instance;
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
   }
 
@@ -30,7 +30,6 @@ class App extends React.Component{
   }
 
   getDataInfinite(args){
-    console.log(args);
     if (!pageCache[page]) {
       pageCache[page] = 1;
       $.ajax({
@@ -61,7 +60,7 @@ class App extends React.Component{
         <header id="header" onClick={this._click.bind(this)}>
           Header
         </header>
-        <ReactXScroll xscrollOptions={{
+        <ReactXScroll ref="instance" xscrollOptions={{
             renderTo: "#J_Scroll1",
             lockY:true,
             lockX:false,

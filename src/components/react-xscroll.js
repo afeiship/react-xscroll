@@ -8,8 +8,6 @@ import XScrollPullDown from 'xscroll/build/cmd/plugins/pulldown';
 import XScrollInfinite from 'xscroll/build/cmd/plugins/infinite';
 import classNames from 'classnames';
 
-let instanceMap = {};
-
 class ReactXScroll extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
@@ -63,14 +61,6 @@ class ReactXScroll extends React.Component{
     return infinite;
   }
 
-  static getInstance(inHandle){
-    return instanceMap[inHandle];
-  }
-  constructor(inProps){
-    super(inProps);
-    instanceMap[inProps.delegateHandle] = this;
-  }
-
   componentDidMount(){
     var self = this;
     var xscroll = this._xscroll = this.createIscroll(this.props);
@@ -90,7 +80,7 @@ class ReactXScroll extends React.Component{
 
   render(){
     return (
-      <div data-delegate-handle={this.props.delegateHandle} className={classNames('react-xscroll-wrapper',this.props.cssClass)}>
+      <div className={classNames('react-xscroll-wrapper',this.props.cssClass)}>
         {this.props.children}
       </div>
     );

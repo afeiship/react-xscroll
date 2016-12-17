@@ -33,31 +33,33 @@ class ReactXScroll extends React.Component{
     onInfinite:null
   };
 
-  static createIscroll(inProps){
-    return new XScroll(inProps.xscrollOptions);
+  createIscroll(){
+    return new XScroll(this.props.xscrollOptions);
   }
 
-  static createPullUpPlugin(inScrollInstance,inProps){
-    var pullup = new XScrollPullUp(inProps.pullupOptions);
+  createPullUpPlugin(){
+    var self=this;
+    var pullup = new XScrollPullUp(this.props.pullupOptions);
     pullup.on('loading',function(){
-      inProps.onInfinite(self);
+      self.props.onInfinite(self);
     });
-    inScrollInstance.plug(pullup);
+    this._xscroll.plug(pullup);
     return pullup;
   }
 
-  static createPullDownPlugin(inScrollInstance,inProps){
-    var pulldown = new XScrollPullDown(inProps.pulldownOptions);
-    inScrollInstance.plug(pulldown);
+  createPullDownPlugin(){
+    var self=this;
+    var pulldown = new XScrollPullDown(this.props.pulldownOptions);
     pulldown.on('loading',function(e){
-      inProps.onRefresh(self);
+      self.props.onRefresh(self);
     });
+    this._xscroll.plug(pulldown);
     return pulldown;
   }
 
-  static createInfinitePlugin(inScrollInstance,inProps){
-    var infinite = new XScrollInfinite(inProps.infiniteOptions);
-    inScrollInstance.plug(infinite);
+  createInfinitePlugin(){
+    var infinite = new XScrollInfinite(this.props.infiniteOptions);
+    this._xscroll.plug(infinite);
     return infinite;
   }
 
@@ -71,10 +73,10 @@ class ReactXScroll extends React.Component{
 
   componentDidMount(){
     var self = this;
-    var xscroll = this._xscroll = ReactXScroll.createIscroll(this.props);
-    this._infinite = ReactXScroll.createInfinitePlugin(xscroll,this.props);
-    this._pullup = ReactXScroll.createPullUpPlugin(xscroll,this.props);
-    this._pulldown = ReactXScroll.createPullDownPlugin(xscroll,this.props);
+    var xscroll = this._xscroll = this.createIscroll(this.props);
+    this._infinite = this.createInfinitePlugin(xscroll,this.props);
+    this._pullup = this.createPullUpPlugin(xscroll,this.props);
+    this._pulldown = this.createPullDownPlugin(xscroll,this.props);
 
     //initial once:?
     this.props.onInfinite && this.props.onInfinite(this);

@@ -30,6 +30,7 @@ class App extends React.Component{
   }
 
   getDataInfinite(args){
+    console.log(args);
     if (!pageCache[page]) {
       pageCache[page] = 1;
       $.ajax({

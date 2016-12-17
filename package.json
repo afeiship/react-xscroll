@@ -76,6 +76,8 @@
     "npm": ">= 3.0.0"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "n-zepto": "^1.2.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "xscroll": "^3.1.2"

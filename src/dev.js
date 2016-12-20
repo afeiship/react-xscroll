@@ -1,4 +1,4 @@
-import ReactXScroll from './main';
+import ReactXScroll from '../dist/react-xscroll';
 import './dev.scss';
 import $ from 'n-zepto'
 
@@ -69,15 +69,15 @@ class App extends React.Component{
         }}>
           <div id="J_Scroll1">
             <div className="xs-container">
-              <ul className="xs-content">
-                <li  className="row">Pretty row 1</li>
-                <li  className="row">Pretty row 2</li>
-                <li  className="row">Pretty row 3</li>
-                <li  className="row">Pretty row 4</li>
-                <li  className="row">Pretty row 5</li>
-                <li  className="row">Pretty row 6</li>
-                <li  className="row">Pretty row 7</li>
-              </ul>
+              <div className="xs-content">
+                <div  className="row">Pretty row 1</div>
+                <div  className="row">Pretty row 2</div>
+                <div  className="row">Pretty row 3</div>
+                <div  className="row">Pretty row 4</div>
+                <div  className="row">Pretty row 5</div>
+                <div  className="row">Pretty row 6</div>
+                <div  className="row">Pretty row 7</div>
+              </div>
             </div>
           </div>
         </ReactXScroll>

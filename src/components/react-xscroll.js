@@ -11,7 +11,6 @@ import classNames from 'classnames';
 class ReactXScroll extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
-    delegateHandle:React.PropTypes.string,
     xscrollOptions:React.PropTypes.object,
     pulldownOptions:React.PropTypes.object,
     pullupOptions:React.PropTypes.object,
@@ -21,11 +20,10 @@ class ReactXScroll extends React.Component{
   };
 
   static defaultProps = {
-    delegateHandle:'',
     xscrollOptions:{},
-    pulldownOptions:{},
-    pullupOptions:{},
-    infiniteOptions:{},
+    pulldownOptions:null,
+    pullupOptions:null,
+    infiniteOptions:null,
     onRefresh:null,
     onInfinite:null
   };
@@ -35,29 +33,35 @@ class ReactXScroll extends React.Component{
   }
 
   createPullUpPlugin(){
-    var self=this;
-    var pullup = new XScrollPullUp(this.props.pullupOptions);
-    pullup.on('loading',function(){
-      self.props.onInfinite(self);
-    });
-    this._xscroll.plug(pullup);
-    return pullup;
+    if(this.props.pullupOptions){
+      var self=this;
+      var pullup = new XScrollPullUp(this.props.pullupOptions);
+      pullup.on('loading',function(){
+        self.props.onInfinite(self);
+      });
+      this._xscroll.plug(pullup);
+      return pullup;
+    }
   }
 
   createPullDownPlugin(){
-    var self=this;
-    var pulldown = new XScrollPullDown(this.props.pulldownOptions);
-    pulldown.on('loading',function(e){
-      self.props.onRefresh(self);
-    });
-    this._xscroll.plug(pulldown);
-    return pulldown;
+    if(this.props.pulldownOptions){
+      var self=this;
+      var pulldown = new XScrollPullDown(this.props.pulldownOptions);
+      pulldown.on('loading',function(e){
+        self.props.onRefresh(self);
+      });
+      this._xscroll.plug(pulldown);
+      return pulldown;
+    }
   }
 
   createInfinitePlugin(){
-    var infinite = new XScrollInfinite(this.props.infiniteOptions);
-    this._xscroll.plug(infinite);
-    return infinite;
+    if(this.props.infiniteOptions){
+      var infinite = new XScrollInfinite(this.props.infiniteOptions);
+      this._xscroll.plug(infinite);
+      return infinite;
+    }
   }
 
   componentDidMount(){

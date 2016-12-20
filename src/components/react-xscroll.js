@@ -7,6 +7,8 @@ import XScrollPullUp from 'xscroll/build/cmd/plugins/pullup';
 import XScrollPullDown from 'xscroll/build/cmd/plugins/pulldown';
 import XScrollInfinite from 'xscroll/build/cmd/plugins/infinite';
 import classNames from 'classnames';
+let uid = 0;
+
 
 class ReactXScroll extends React.Component{
   static propTypes = {
@@ -28,8 +30,16 @@ class ReactXScroll extends React.Component{
     onInfinite:null
   };
 
+  constructor(props){
+  	super(props);
+    this._renderId= `rn-xscroll-${this._id}`;
+  }
+
   createIscroll(){
-    return new XScroll(this.props.xscrollOptions);
+    let options = Object.assign({
+      renderTo:`#${this._renderId}`
+    },this.props.xscrollOptions);
+    return new XScroll(options);
   }
 
   createPullUpPlugin(){
@@ -66,10 +76,10 @@ class ReactXScroll extends React.Component{
 
   componentDidMount(){
     var self = this;
-    var xscroll = this._xscroll = this.createIscroll(this.props);
-    this._infinite = this.createInfinitePlugin(xscroll,this.props);
-    this._pullup = this.createPullUpPlugin(xscroll,this.props);
-    this._pulldown = this.createPullDownPlugin(xscroll,this.props);
+    var xscroll = this._xscroll = this.createIscroll();
+    this._infinite = this.createInfinitePlugin();
+    this._pullup = this.createPullUpPlugin();
+    this._pulldown = this.createPullDownPlugin();
 
     //initial once:?
     this.props.onInfinite && this.props.onInfinite(this);
@@ -83,7 +93,7 @@ class ReactXScroll extends React.Component{
 
   render(){
     return (
-      <div className={classNames('react-xscroll',this.props.cssClass)}>
+      <div id={this._renderId} className={classNames('react-xscroll',this.props.cssClass)}>
         {this.props.children}
       </div>
     );

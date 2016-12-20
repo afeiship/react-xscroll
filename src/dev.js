@@ -1,4 +1,4 @@
-import ReactXScroll from '../dist/react-xscroll';
+import ReactXScroll from './main';
 import './dev.scss';
 import $ from 'n-zepto'
 
@@ -61,7 +61,6 @@ class App extends React.Component{
           Header
         </header>
         <ReactXScroll ref="instance" xscrollOptions={{
-            renderTo: "#J_Scroll1",
             lockY:true,
             lockX:false,
             scrollbarX:false,

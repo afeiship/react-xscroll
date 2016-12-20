@@ -21,7 +21,6 @@ class ReactXScroll extends React.Component{
   };
 
   static defaultProps = {
-    cssClass:'wrapper',
     delegateHandle:'',
     xscrollOptions:{},
     pulldownOptions:{},
@@ -80,7 +79,7 @@ class ReactXScroll extends React.Component{
 
   render(){
     return (
-      <div className={classNames('react-xscroll-wrapper',this.props.cssClass)}>
+      <div className={classNames('react-xscroll',this.props.cssClass)}>
         {this.props.children}
       </div>
     );

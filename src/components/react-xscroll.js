@@ -32,7 +32,7 @@ class ReactXScroll extends React.Component{
 
   constructor(props){
   	super(props);
-    this._renderId= `rn-xscroll-${this._id}`;
+    this._renderId= 'rn-xscroll-'+uid++;
   }
 
   createIscroll(){

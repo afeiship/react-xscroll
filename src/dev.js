@@ -60,7 +60,9 @@ class App extends React.Component{
         <header id="header" onClick={this._click.bind(this)}>
           Header
         </header>
-        <ReactXScroll ref="instance" xscrollOptions={{
+        <ReactXScroll ref="instance"
+          cssClass="J_Scroll1"
+           xscrollOptions={{
             lockY:true,
             lockX:false,
             scrollbarX:false,
@@ -82,6 +84,7 @@ class App extends React.Component{
         </ReactXScroll>
 
         <ReactXScroll
+          cssClass="J_Scroll"
         onRefresh={this.getDataRefresh.bind(this)}
         onInfinite={this.getDataInfinite.bind(this)}
         pulldownOptions={{
@@ -102,10 +105,8 @@ class App extends React.Component{
         }}
 
         xscrollOptions={{
-            renderTo: "#J_Scroll",
             lockY:false
         }}>
-          <div id="J_Scroll">
             <div className="xs-container">
               <ul className="xs-content">
           			<li  className="row">Pretty row 1</li>
@@ -160,7 +161,6 @@ class App extends React.Component{
           			<li  className="row">Pretty row 50</li>
           		</ul>
             </div>
-          </div>
         </ReactXScroll>
         <footer id="footer">Footer</footer>
       </div>

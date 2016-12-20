@@ -49,7 +49,7 @@ body {
     text-align: center;
 }
 
-#J_Scroll {
+.J_Scroll {
     position: absolute;
     z-index: 1;
     top: 145px;
@@ -59,7 +59,7 @@ body {
     overflow: hidden;
 }
 
-#J_Scroll li{
+.J_Scroll .row{
   width: 100%;
   padding: 0 10px;
   height: 40px;
@@ -69,18 +69,18 @@ body {
 }
 
 
-#J_Scroll1{
+.J_Scroll1{
   margin-top: 45px;
   height: 100px;
 }
-#J_Scroll1 .xs-content{
+.J_Scroll1 .xs-content{
     white-space: nowrap;
     position: absolute;
     height: 100%;
     font-size: 0;
 }
 
-#J_Scroll1 .xs-content .row{
+.J_Scroll1 .xs-content .row{
     display: inline-block;
     font-size: 12px;
     width: 100px;

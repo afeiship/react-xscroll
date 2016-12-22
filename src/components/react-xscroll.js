@@ -36,6 +36,7 @@ class ReactXScroll extends React.Component{
   }
 
   createIscroll(){
+    debugger;
     let options = Object.assign({
       renderTo:`#${this._renderId}`
     },this.props.xscrollOptions);

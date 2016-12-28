@@ -68,19 +68,13 @@ class App extends React.Component{
             scrollbarX:false,
             scrollbarY:false
         }}>
-          <div id="J_Scroll1">
-            <div className="xs-container">
-              <div className="xs-content">
-                <div  className="row">Pretty row 1</div>
-                <div  className="row">Pretty row 2</div>
-                <div  className="row">Pretty row 3</div>
-                <div  className="row">Pretty row 4</div>
-                <div  className="row">Pretty row 5</div>
-                <div  className="row">Pretty row 6</div>
-                <div  className="row">Pretty row 7</div>
-              </div>
-            </div>
-          </div>
+            <div  className="row">Pretty row 1</div>
+            <div  className="row">Pretty row 2</div>
+            <div  className="row">Pretty row 3</div>
+            <div  className="row">Pretty row 4</div>
+            <div  className="row">Pretty row 5</div>
+            <div  className="row">Pretty row 6</div>
+            <div  className="row">Pretty row 7</div>
         </ReactXScroll>
 
         <ReactXScroll
@@ -98,7 +92,7 @@ class App extends React.Component{
         }}
 
         infiniteOptions={{
-            infiniteElements:"#J_Scroll .row",
+            infiniteElements:".J_Scroll .row",
             renderHook:function(el,data){
               el.innerText = data.data.num;
             }
@@ -107,8 +101,7 @@ class App extends React.Component{
         xscrollOptions={{
             lockY:false
         }}>
-            <div className="xs-container">
-              <ul className="xs-content">
+              <ul>
           			<li  className="row">Pretty row 1</li>
           			<li  className="row">Pretty row 2</li>
           			<li  className="row">Pretty row 3</li>
@@ -160,7 +153,6 @@ class App extends React.Component{
           			<li  className="row">Pretty row 49</li>
           			<li  className="row">Pretty row 50</li>
           		</ul>
-            </div>
         </ReactXScroll>
         <footer id="footer">Footer</footer>
       </div>

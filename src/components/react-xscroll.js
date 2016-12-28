@@ -7,12 +7,14 @@ import XScrollPullUp from 'xscroll/build/cmd/plugins/pullup';
 import XScrollPullDown from 'xscroll/build/cmd/plugins/pulldown';
 import XScrollInfinite from 'xscroll/build/cmd/plugins/infinite';
 import classNames from 'classnames';
-let uid = 0;
 
+let uid = 0;
 
 class ReactXScroll extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
+    top:React.PropTypes.string,
+    bottom:React.PropTypes.string,
     xscrollOptions:React.PropTypes.object,
     pulldownOptions:React.PropTypes.object,
     pullupOptions:React.PropTypes.object,
@@ -27,7 +29,9 @@ class ReactXScroll extends React.Component{
     pullupOptions:null,
     infiniteOptions:null,
     onRefresh:null,
-    onInfinite:null
+    onInfinite:null,
+    top:'0',
+    bottom:'0',
   };
 
   constructor(props){
@@ -36,7 +40,6 @@ class ReactXScroll extends React.Component{
   }
 
   createIscroll(){
-    debugger;
     let options = Object.assign({
       renderTo:`#${this._renderId}`
     },this.props.xscrollOptions);
@@ -94,8 +97,17 @@ class ReactXScroll extends React.Component{
 
   render(){
     return (
-      <div id={this._renderId} className={classNames('react-xscroll',this.props.cssClass)}>
-        {this.props.children}
+      <div id={this._renderId}
+        style={{
+          top:this.props.top,
+          bottom:this.props.bottom
+        }}
+        className={classNames('react-xscroll',this.props.cssClass)}>
+        <div className="xs-container">
+          <div className="xs-content">
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }

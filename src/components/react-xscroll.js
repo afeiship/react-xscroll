@@ -33,6 +33,9 @@ class ReactXScroll extends React.Component{
   constructor(props){
   	super(props);
     this._renderId= 'rn-xscroll-'+uid++;
+    this.props = {
+      cssClass:props.cssClass
+    }
   }
 
   createIscroll(){
@@ -91,10 +94,14 @@ class ReactXScroll extends React.Component{
     return this._xscroll[inName].apply(this._xscroll, args);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
+  }
+
   render(){
     return (
       <div id={this._renderId}
-        className={classNames('react-xscroll',this.props.cssClass)}>
+        className={classNames('react-xscroll',this.state.cssClass)}>
         <div className="xs-container">
           <div className="xs-content">
             {this.props.children}

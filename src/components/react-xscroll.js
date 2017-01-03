@@ -13,8 +13,6 @@ let uid = 0;
 class ReactXScroll extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
-    top:React.PropTypes.string,
-    bottom:React.PropTypes.string,
     xscrollOptions:React.PropTypes.object,
     pulldownOptions:React.PropTypes.object,
     pullupOptions:React.PropTypes.object,
@@ -30,8 +28,6 @@ class ReactXScroll extends React.Component{
     infiniteOptions:null,
     onRefresh:null,
     onInfinite:null,
-    top:'0',
-    bottom:'0',
   };
 
   constructor(props){
@@ -98,10 +94,6 @@ class ReactXScroll extends React.Component{
   render(){
     return (
       <div id={this._renderId}
-        style={{
-          top:this.props.top,
-          bottom:this.props.bottom
-        }}
         className={classNames('react-xscroll',this.props.cssClass)}>
         <div className="xs-container">
           <div className="xs-content">

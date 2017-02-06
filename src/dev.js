@@ -36,6 +36,7 @@ class App extends React.Component{
         url: "http://xscroll.github.io/demos/data.json",
         dataType: "json",
         success: function(data) {
+          window.aa= args;
           if (page > totalPage) {
             //last page
             args._pullup.complete();
@@ -94,7 +95,7 @@ class App extends React.Component{
         infiniteOptions={{
             infiniteElements:".J_Scroll .row",
             renderHook:function(el,data){
-              el.innerText = data.data.num;
+              // el.innerText = data.data.num;
             }
         }}
 

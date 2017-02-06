@@ -50,7 +50,7 @@ class ReactXScroll extends React.Component{
       var self=this;
       var pullup = new XScrollPullUp(this.props.pullupOptions);
       pullup.on('loading',function(){
-        self.props.onInfinite(self);
+        self.props.onInfinite();
       });
       this._xscroll.plug(pullup);
       return pullup;
@@ -85,7 +85,7 @@ class ReactXScroll extends React.Component{
     this._pulldown = this.createPullDownPlugin();
 
     //initial once:?
-    this.props.onInfinite && this.props.onInfinite(this);
+    this.props.onInfinite && this.props.onInfinite();
     xscroll.render();
   }
 

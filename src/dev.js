@@ -9,7 +9,6 @@ import $ from 'n-zepto'
 
 class App extends React.Component{
   componentDidMount(){
-    this._instance=this.refs.instance;
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
   }
 
@@ -17,7 +16,9 @@ class App extends React.Component{
     // this._instnace.invoke('scrollTo',0,-100);
   }
 
-  getDataRefresh(args){
+  getDataRefresh(){
+    var self = this;
+    var args = this.refs.xs1;
     $.ajax({
         url: "http://xscroll.github.io/demos/data.json",
         dataType:"json",
@@ -29,13 +30,16 @@ class App extends React.Component{
     });
   }
 
-  getDataInfinite(args){
+  getDataInfinite(){
+    var self = this;
+    console.log(this.refs);
     if (!pageCache[page]) {
       pageCache[page] = 1;
       $.ajax({
         url: "http://xscroll.github.io/demos/data.json",
         dataType: "json",
         success: function(data) {
+          var args = self.refs.xs2;
           window.aa= args;
           if (page > totalPage) {
             //last page
@@ -61,7 +65,7 @@ class App extends React.Component{
         <header id="header" onClick={this._click.bind(this)}>
           Header
         </header>
-        <ReactXScroll ref="instance"
+        <ReactXScroll ref="xs1"
           cssClass="J_Scroll1"
            xscrollOptions={{
             lockY:true,
@@ -79,6 +83,7 @@ class App extends React.Component{
         </ReactXScroll>
 
         <ReactXScroll
+        ref="xs2"
           cssClass="J_Scroll"
         onRefresh={this.getDataRefresh.bind(this)}
         onInfinite={this.getDataInfinite.bind(this)}
@@ -103,25 +108,6 @@ class App extends React.Component{
             lockY:false
         }}>
               <ul>
-          			<li  className="row">Pretty row 1</li>
-          			<li  className="row">Pretty row 2</li>
-          			<li  className="row">Pretty row 3</li>
-          			<li  className="row">Pretty row 4</li>
-          			<li  className="row">Pretty row 5</li>
-          			<li  className="row">Pretty row 6</li>
-          			<li  className="row">Pretty row 7</li>
-          			<li  className="row">Pretty row 8</li>
-          			<li  className="row">Pretty row 9</li>
-          			<li  className="row">Pretty row 10</li>
-          			<li  className="row">Pretty row 11</li>
-          			<li  className="row">Pretty row 12</li>
-          			<li  className="row">Pretty row 13</li>
-          			<li  className="row">Pretty row 14</li>
-          			<li  className="row">Pretty row 15</li>
-          			<li  className="row">Pretty row 16</li>
-          			<li  className="row">Pretty row 17</li>
-          			<li  className="row">Pretty row 18</li>
-          			<li  className="row">Pretty row 19</li>
           			<li  className="row">Pretty row 20</li>
           			<li  className="row">Pretty row 21</li>
           			<li  className="row">Pretty row 22</li>
@@ -132,27 +118,6 @@ class App extends React.Component{
           			<li  className="row">Pretty row 27</li>
           			<li  className="row">Pretty row 28</li>
           			<li  className="row">Pretty row 29</li>
-          			<li  className="row">Pretty row 30</li>
-          			<li  className="row">Pretty row 31</li>
-          			<li  className="row">Pretty row 32</li>
-          			<li  className="row">Pretty row 33</li>
-          			<li  className="row">Pretty row 34</li>
-          			<li  className="row">Pretty row 35</li>
-          			<li  className="row">Pretty row 36</li>
-          			<li  className="row">Pretty row 37</li>
-          			<li  className="row">Pretty row 38</li>
-          			<li  className="row">Pretty row 39</li>
-          			<li  className="row">Pretty row 40</li>
-          			<li  className="row">Pretty row 41</li>
-          			<li  className="row">Pretty row 42</li>
-          			<li  className="row">Pretty row 43</li>
-          			<li  className="row">Pretty row 44</li>
-          			<li  className="row">Pretty row 45</li>
-          			<li  className="row">Pretty row 46</li>
-          			<li  className="row">Pretty row 47</li>
-          			<li  className="row">Pretty row 48</li>
-          			<li  className="row">Pretty row 49</li>
-          			<li  className="row">Pretty row 50</li>
           		</ul>
         </ReactXScroll>
         <footer id="footer">Footer</footer>

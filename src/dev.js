@@ -16,9 +16,8 @@ class App extends React.Component{
     // this._instnace.invoke('scrollTo',0,-100);
   }
 
-  getDataRefresh(){
+  getDataRefresh(args){
     var self = this;
-    var args = this.refs.xs1;
     $.ajax({
         url: "http://xscroll.github.io/demos/data.json",
         dataType:"json",
@@ -30,16 +29,14 @@ class App extends React.Component{
     });
   }
 
-  getDataInfinite(){
+  getDataInfinite(args){
     var self = this;
-    console.log(this.refs);
     if (!pageCache[page]) {
       pageCache[page] = 1;
       $.ajax({
         url: "http://xscroll.github.io/demos/data.json",
         dataType: "json",
         success: function(data) {
-          var args = self.refs.xs2;
           window.aa= args;
           if (page > totalPage) {
             //last page

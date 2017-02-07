@@ -80,16 +80,13 @@ class ReactXScroll extends React.Component{
   componentDidMount(){
     var self = this;
     var xscroll = this._xscroll = this.createIscroll();
-    xscroll.render();
-  }
-
-  attachPlugins(){
     this._infinite = this.createInfinitePlugin();
     this._pullup = this.createPullUpPlugin();
     this._pulldown = this.createPullDownPlugin();
+
     //initial once:?
     this.props.onInfinite && this.props.onInfinite(this);
-    this._xscroll.render();
+    xscroll.render();
   }
 
   invoke(inName){

@@ -89,6 +89,7 @@ class ReactXScroll extends React.Component{
     this._pulldown = this.createPullDownPlugin();
     //initial once:?
     this.props.onInfinite && this.props.onInfinite(this);
+    this._xscroll.render();
   }
 
   invoke(inName){
